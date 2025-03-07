@@ -3,7 +3,7 @@
 > 사용 프로그램: Java
 
 ***
-블로그: [level 1](https://velog.io/@yong-lee/Java-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%A7%8C%EB%93%A4%EA%B8%B0-Lv-1) [level 2]()
+블로그: [level 1](https://velog.io/@yong-lee/Java-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%A7%8C%EB%93%A4%EA%B8%B0-Lv-1) [level 2](https://velog.io/@yong-lee/Java-%ED%82%A4%EC%98%A4%EC%8A%A4%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%A7%8C%EB%93%A4%EA%B8%B0-Lv-2)
 ***
 ### 프로젝트 설명
 백엔드 개발 역량을 상승시키기 위해서 가장 기본이라고 할 수 있는 자바 언어와 친숙해지기 위해 시작한 프로젝트입니다.
