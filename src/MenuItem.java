@@ -1,23 +1,23 @@
 public class MenuItem {
-    private String name;
-    private double price;
-    private String detail;
+    private final String NAME;
+    private final double PRICE;
+    private final String DETAIL;
 
     public MenuItem(String name, double price, String detail) {
-        this.name = name;
-        this.price = price;
-        this.detail = detail;
+        this.NAME = name;
+        this.PRICE = price;
+        this.DETAIL = detail;
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     public double getPrice() {
-        return price;
+        return PRICE;
     }
 
     public String getDetail() {
-        return detail;
+        return DETAIL;
     }
 }
