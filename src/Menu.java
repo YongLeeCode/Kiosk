@@ -1,23 +1,23 @@
 import java.util.List;
 
 public class Menu {
-    private String category;
-    private List<MenuItem> items;
+    private final String CETEGORY;
+    private final List<MenuItem> ITEMS;
 
     public Menu(String category, List<MenuItem> items) {
-        this.category = category;
-        this.items = items;
+        this.CETEGORY = category;
+        this.ITEMS = items;
     }
 
     public MenuItem getItem(int itemNumber) {
-        return items.get(itemNumber - 1);
+        return ITEMS.get(itemNumber - 1);
     }
 
     public List<MenuItem> getItems() {
-        return items;
+        return ITEMS;
     }
 
     public String getCategory() {
-        return category;
+        return CETEGORY;
     }
 }
