@@ -1,6 +1,9 @@
 package menu;
 
+import enums.Category;
+
 import java.util.List;
+import java.util.Map;
 
 public class Menu {
     private final List<MenuItem> burgers = List.of(
@@ -24,23 +27,21 @@ public class Menu {
             new MenuItem("Coal slaw", 5.4, "중독 될거 같아요 ~.~")
     );
 
-    public List<MenuItem> getItems(int i) {
-        return switch(i) {
-            case 1 -> burgers;
-            case 2 -> drinks;
-            case 3 -> desserts;
-            default -> throw new IllegalStateException("Unexpected value: " + i);
-        };
-    }
-//    public MenuItem getItem(int itemNumber) {
-//        return ITEMS.get(itemNumber - 1);
-//    }
-//
-//    public List<MenuItem> getItems() {
-//        return ITEMS;
-//    }
+    Map<Category, List<MenuItem>> menuCategory = Map.of(
+            Category.BURGERS, burgers,
+            Category.DRINKS, drinks,
+            Category.DESSERTS, desserts
+    );
 
-//    public String getCategory() {
-//        return CETEGORY;
-//    }
+    public List<MenuItem> getItems(Category category) {
+        return menuCategory.get(category);
+    }
+
+    public MenuItem getItem(Category c, int item) {
+        return getItems(c).get(item - 1);
+    }
+
+    public int getItemsLength(Category c) {
+        return getItems(c).size();
+    }
 }
