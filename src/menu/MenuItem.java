@@ -1,3 +1,5 @@
+package menu;
+
 public class MenuItem {
     private final String NAME;
     private final double PRICE;
