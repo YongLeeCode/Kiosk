@@ -2,12 +2,11 @@ package cart;
 
 import menu.MenuItem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class Cart {
-    private HashMap<MenuItem, Integer> mapItems = new HashMap<>();
+    private Map<MenuItem, Integer> mapItems = new HashMap<>();
 
     public void removeCart() {
         mapItems = new HashMap<>();
@@ -17,15 +16,11 @@ public class Cart {
         this.mapItems.put(item, this.mapItems.getOrDefault(item, 0) + 1);
     }
 
-    public Integer getOrderQuantity() {
-        int quantity = 0;
-        for (MenuItem key : mapItems.keySet()) {
-            quantity += mapItems.get(key);
-        }
-        return quantity;
+    public boolean isCartEmpty() {
+        return mapItems.isEmpty();
     }
 
-    public HashMap<MenuItem, Integer> getItemsFromCart() {
+    public Map<MenuItem, Integer> getItemsFromCart() {
         return mapItems;
     }
 
