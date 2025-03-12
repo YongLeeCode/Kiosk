@@ -36,5 +36,25 @@ public class Input {
             return getItemNumber(size);
         }
     }
+
+    public int getOrderDecision () {
+        try {
+            int itemNumber = scanner.nextInt();
+            if((itemNumber == 1 || itemNumber == 2)) {
+                return itemNumber;
+            }
+            throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
+
+        } catch (InputMismatchException e) {
+            System.out.println("번호만 입력 가능합니다.");
+            System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
+            scanner.nextLine();
+            return getOrderDecision();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
+            return getOrderDecision();
+        }
+    }
 }
 

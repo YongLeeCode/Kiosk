@@ -4,6 +4,8 @@ public enum Category {
     BURGERS(1, "Burgers"),
     DRINKS(2, "Drinks"),
     DESSERTS(3, "Desserts"),
+    ORDER(4, "Order"),
+    CANCEL(5, "Cancel"),
     EXIT(0, "Exit");
 
     private final int categoryNumber;
@@ -18,6 +20,18 @@ public enum Category {
         return category;
     }
 
+    /**
+     * 설명: 입력값을 Enum 클래스로 원하는 값으로 반환
+     *
+     * <p>{입력값에서 선택 가능한 숫자: 0~5}
+     *
+     * @param  입력 정수값
+     * @return Category 클래스 값으로 반환
+     * @throws IndexOutOfBoundsException {0~5가 아닌 숫자가 온 경우}
+     * @author Yong
+     * @version 1.0
+     * @since 2025-03-12
+     */
     public static Category fromCategoryNumber(int categoryNumber) {
         for (Category c : values()) {
             if (c.categoryNumber == categoryNumber) {
