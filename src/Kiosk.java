@@ -8,6 +8,7 @@ import menu.MenuItem;
 import java.util.List;
 
 public class Kiosk {
+    private static int MOVE_PREVIOUS = 0;
     Input input = new Input();
     Output output = new Output();
     Category category;
@@ -15,35 +16,30 @@ public class Kiosk {
 
     public void start() {
         Menu menu = new Menu();
-        int end = 0;
+        boolean end = false;
 
-        while (end != 1) {
-            //메뉴 출력 및 선택
+        while (!end) {
+            //메인 메뉴 출력
             output.displayMainMenu();
-            output.displayOrderMenu(cart.getOrderQuantity());
+            output.displayOrderMenu(cart.isCartEmpty());
             try {
-                category = Category.fromCategoryNumber(input.getNumber(), cart.getOrderQuantity());
+                category = Category.fromCategoryNumber(input.getNumber(), cart.isCartEmpty());
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
 
-            if (category.getCategory().equals("Exit")) {
-                end = 1;
-            } else if (category.getCategory().equals("Order")) {
-                end = orderProcess();
-            } else if (category.getCategory().equals("Cancel")) {
-                cart.removeCart();
-                output.displayClearCart();
-            } else {
-                addToCartProcess(menu);
+            switch (category.getCategory()) {
+                case "Exit" : end = true; break;
+                case "Order" : end = orderProcess(); break;
+                case "Cancel" : cart.removeCart(); output.displayClearCart(); break;
+                default : addToCartProcess(menu); break;
             }
-
         }
         output.displayResult(cart.getTotal());
     }
 
-    private int orderProcess() {
+    private boolean orderProcess() {
         output.displayCartItems(cart.getItemsFromCart());
         System.out.println("1. 주문        2. 메뉴판");
         output.displayTotalPrice(cart.getTotal());
@@ -55,11 +51,11 @@ public class Kiosk {
         List<MenuItem> items = menu.getItems(category);
         output.displayMenuItems(category.getCategory(), items);
         int itemSelection = input.getItemNumber(menu.getItemsLength(category));
-        if (itemSelection != 0) {
+        if (itemSelection != MOVE_PREVIOUS) {
             output.displayOrder(menu.getItem(category, itemSelection));
             System.out.println("이 메뉴를 장바구니에 넣으시겠습니까?");
             System.out.println("1. 확인        2. 취소");
-            if(input.getOrderDecision() == 1) {
+            if (input.getOrderDecision()) {
                 cart.addToCart(menu.getItem(category, itemSelection));
                 output.displayCartItems(cart.getItemsFromCart());
             }
