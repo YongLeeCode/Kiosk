@@ -24,10 +24,10 @@ public class Cart {
         return mapItems;
     }
 
-    public double getTotal() {
+    public double getTotal(double discount) {
         double total = 0;
         for (MenuItem item : mapItems.keySet()) {
-            total += item.getPrice() * mapItems.get(item);
+            total += (item.getPrice() * mapItems.get(item)) * discount;
         }
         return total;
     }

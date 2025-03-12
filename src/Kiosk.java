@@ -1,17 +1,21 @@
 import cart.Cart;
 import enums.Category;
+import enums.Discount;
 import io.Input;
 import io.Output;
 import menu.Menu;
 import menu.MenuItem;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Kiosk {
     private static int MOVE_PREVIOUS = 0;
+
     Input input = new Input();
     Output output = new Output();
     Category category;
+    Discount discount;
     Cart cart = new Cart();
 
     public void start() {
@@ -36,14 +40,46 @@ public class Kiosk {
                 default : addToCartProcess(menu); break;
             }
         }
-        output.displayResult(cart.getTotal());
+        output.displayResult(cart.getTotal(discount.getDiscountRatio()));
     }
+
 
     private boolean orderProcess() {
         output.displayCartItems(cart.getItemsFromCart());
         System.out.println("1. 주문        2. 메뉴판");
-        output.displayTotalPrice(cart.getTotal());
-        return input.getOrderDecision();
+
+        boolean isOrder = input.getOrderDecision();
+        if(isOrder) {
+            discountProcess();
+        }
+        return isOrder;
+    }
+
+    private void discountProcess() {
+        output.displayDiscount(Discount.values());
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        try {
+            switch (a) {
+                case 1:
+                    discount = Discount.NATIONAL_MERITORIOUS_PERSON;
+                    break;
+                case 2:
+                    discount = Discount.SOLDIER;
+                    break;
+                case 3:
+                    discount = Discount.STUDENT;
+                    break;
+                case 4:
+                    discount = Discount.COMMON;
+                    break;
+                default:
+                    throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.\n다시 입력해주세요.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+            discountProcess();
+        }
     }
 
     private void addToCartProcess(Menu menu) {
