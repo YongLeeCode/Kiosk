@@ -1,7 +1,7 @@
 package io;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import menu.MenuItem;
@@ -18,8 +18,8 @@ public class Output {
                 -------------""");
     }
 
-    public void displayOrderMenu(Integer orderQuantity) {
-        if (!orderQuantity.equals(0)) {
+    public void displayOrderMenu(boolean isCartEmpty) {
+        if (!isCartEmpty) {
             System.out.println("""
             -------------
             [ Order Menu ]
@@ -37,7 +37,7 @@ public class Output {
         System.out.println("-------------");
     }
 
-    public void displayCartItems(HashMap<MenuItem, Integer> items) {
+    public void displayCartItems(Map<MenuItem, Integer> items) {
         System.out.println("\n-------------");
         System.out.println("[ Orders ]");
         for (MenuItem key : items.keySet()) {

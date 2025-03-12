@@ -31,10 +31,14 @@ public enum Category {
      * @author Yong
      * @version 1.0
      * @since 2025-03-12
+     * @메롱 hello
      */
-    public static Category fromCategoryNumber(int categoryNumber) {
+    public static Category fromCategoryNumber(int categoryNumber, boolean isCartEmpty) {
         for (Category c : values()) {
             if (c.categoryNumber == categoryNumber) {
+                if((c.category.equals("Order") || c.category.equals("Cancel")) && isCartEmpty) {
+                    throw new IndexOutOfBoundsException("현재 선택할 수 없는 번호입니다.");
+                }
                 return c;
             }
         }
