@@ -22,7 +22,7 @@ public class Kiosk {
             output.displayMainMenu();
             output.displayOrderMenu(cart.getOrderQuantity());
             try {
-                category = Category.fromCategoryNumber(input.getNumber());
+                category = Category.fromCategoryNumber(input.getNumber(), cart.getOrderQuantity());
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
                 continue;
