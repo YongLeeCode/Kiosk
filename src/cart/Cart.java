@@ -7,41 +7,33 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Cart {
-    private List<MenuItem> items = new ArrayList<>();
     private HashMap<MenuItem, Integer> mapItems = new HashMap<>();
 
+    public void removeCart() {
+        mapItems = new HashMap<>();
+    }
+
     public void addToCart(MenuItem item) {
-//        this.items.add(item);
         this.mapItems.put(item, this.mapItems.getOrDefault(item, 0) + 1);
     }
 
     public Integer getOrderQuantity() {
-//        return items.size();
         int quantity = 0;
-        for(MenuItem key : mapItems.keySet()) {
+        for (MenuItem key : mapItems.keySet()) {
             quantity += mapItems.get(key);
         }
         return quantity;
     }
 
-    public void getReceipt() {
-        for(MenuItem key : mapItems.keySet()) {
-            System.out.println(key.getName() + " " + key.getPrice() + " : " + mapItems.get(key));
-        }
+    public HashMap<MenuItem, Integer> getItemsFromCart() {
+        return mapItems;
     }
-
-    public List<MenuItem> getItemsFromCart() {
-        return items;
-    }
-
-//    public HashMap<MenuItem, Integer> getItemsFromCartWithMap() {
-//        return mapItems;
-//    }
 
     public double getTotal() {
-        return this.items.stream()
-                .mapToDouble(i -> i.getPrice())
-                .sum();
+        double total = 0;
+        for (MenuItem item : mapItems.keySet()) {
+            total += item.getPrice() * mapItems.get(item);
+        }
+        return total;
     }
-
 }
