@@ -1,7 +1,8 @@
 package io;
 
-
+import menu.MenuItem;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Input {
@@ -24,7 +25,6 @@ public class Input {
                 return itemNumber;
             }
             throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
-
         } catch (InputMismatchException e) {
             System.out.println("번호만 입력 가능합니다.");
             System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
@@ -37,11 +37,11 @@ public class Input {
         }
     }
 
-    public boolean getOrderDecision () {
+    public int getOrderDecision() {
         try {
             return switch (scanner.nextInt()) {
-                case 1 -> true;
-                case 2 -> false;
+                case 1 -> 1;
+                case 2 -> 2;
                 default -> throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
             };
         } catch (InputMismatchException e) {
@@ -54,6 +54,10 @@ public class Input {
             System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
             return getOrderDecision();
         }
+    }
+
+    public MenuItem getCancelItem(Map<Integer, MenuItem> items) {
+        return items.get(scanner.nextInt());
     }
 }
 
