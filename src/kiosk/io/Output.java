@@ -1,12 +1,12 @@
-package io;
+package kiosk.io;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import enums.Discount;
-import menu.MenuItem;
+import kiosk.enums.Discount;
+import kiosk.menu.MenuItem;
 
 public class Output {
     public void displayMainMenu() {

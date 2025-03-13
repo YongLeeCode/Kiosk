@@ -1,6 +1,7 @@
-package io;
+package kiosk.io;
 
-import menu.MenuItem;
+import kiosk.Kiosk;
+import kiosk.menu.MenuItem;
 import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
@@ -40,8 +41,8 @@ public class Input {
     public int getOrderDecision() {
         try {
             return switch (scanner.nextInt()) {
-                case 1 -> 1;
-                case 2 -> 2;
+                case 1 -> Kiosk.ORDER;
+                case 2 -> Kiosk.MAIN_MENU;
                 default -> throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
             };
         } catch (InputMismatchException e) {
