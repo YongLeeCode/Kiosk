@@ -1,30 +1,33 @@
-import cart.Cart;
-import enums.Category;
-import enums.Discount;
-import io.Input;
-import io.Output;
-import menu.Menu;
-import menu.MenuItem;
+package kiosk;
+
+import kiosk.cart.Cart;
+import kiosk.enums.Category;
+import kiosk.enums.Discount;
+import kiosk.io.Input;
+import kiosk.io.Output;
+import kiosk.menu.Menu;
+import kiosk.menu.MenuItem;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 /**
- * packageName    : PACKAGE_NAME
- * fileName       : Kiosk2
- * author         : yong
- * date           : 3/13/25
- * description    :
+ * @packageName    : kiosk
+ * @fileName       : Kiosk
+ * @author         : yong
+ * @date           : 3/13/25
+ * @description    : 키오스크의 모든 프로세스를 담당하는 클래스
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
  * 3/13/25        yong       최초 생성
  */
-public class Kiosk2 {
+public class Kiosk {
+    public static final int ORDER = 1;
+    public static final int MAIN_MENU = 2;
     private static final int MOVE_PREVIOUS = 0;
     public static final int EXIT = 0;
-    public static final int ORDERED = 1;
 
     Input input = new Input();
     Output output = new Output();
@@ -35,7 +38,7 @@ public class Kiosk2 {
     public void start() {
         Menu menu = new Menu();
         int kiosk = 10;
-        while (kiosk != EXIT) {
+        while (kiosk != EXIT && kiosk != ORDER) {
             //메인 메뉴 출력
             output.displayMainMenu();
             output.displayOrderMenu(cart.isCartEmpty());
@@ -54,14 +57,18 @@ public class Kiosk2 {
             }
         }
 
-        output.displayResult(cart.getTotal(discount.getDiscountRatio()));
+        switch (kiosk) {
+            case EXIT -> System.out.println("키오스크를 종료합니다.");
+            case ORDER -> output.displayResult(cart.getTotal(discount.getDiscountRatio()));
+            default -> throw new RuntimeException();
+        }
     }
 
     private int orderProcess() {
         output.displayCartItems(cart.getItemsFromCart());
         System.out.println("1. 주문        2. 메뉴판");
         int isOrder = input.getOrderDecision();
-        if(isOrder == EXIT) {
+        if(isOrder == ORDER) {
             discountProcess();
         }
         return isOrder;
