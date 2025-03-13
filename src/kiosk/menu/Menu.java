@@ -1,6 +1,6 @@
-package menu;
+package kiosk.menu;
 
-import enums.Category;
+import kiosk.enums.Category;
 
 import java.util.List;
 import java.util.Map;

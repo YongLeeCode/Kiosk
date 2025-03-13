@@ -1,7 +1,7 @@
-package enums;
+package kiosk.enums;
 
 /**
- * packageName    : enums
+ * packageName    : kiosk.enums
  * fileName       : Discount
  * author         : yong
  * date           : 3/12/25

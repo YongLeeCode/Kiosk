@@ -1,6 +1,6 @@
-package cart;
+package kiosk.cart;
 
-import menu.MenuItem;
+import kiosk.menu.MenuItem;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package enums;
+package kiosk.enums;
 
 public enum Category {
     BURGERS(1, "Burgers"),
