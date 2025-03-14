@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+import kiosk.enums.Action;
 import kiosk.enums.Discount;
 import kiosk.menu.MenuItem;
 
@@ -20,30 +21,31 @@ public class Output {
                 -------------""");
     }
 
-    public void displayOrderMenu(boolean isCartEmpty) {
-        if (!isCartEmpty) {
-            System.out.println("""
-            -------------
-            [ Order Menu ]
-            4. Order
-            5. Cancel
-            -------------
-            """);
-        }
+    public void displayOrderMenu() {
+        System.out.println("""
+                -------------
+                [ Choose Action ]
+                """);
+        System.out.printf("%d. %s \n", Action.ORDER.getActionNumber(), Action.ORDER.getActionName());
+        System.out.printf("%d. %s \n", Action.PURCHASE.getActionNumber(), Action.PURCHASE.getActionName());
+        System.out.printf("%d. %s \n", Action.CANCEL.getActionNumber(), Action.CANCEL.getActionName());
+        System.out.printf("%d. %s \n", Action.EXIT.getActionNumber(), Action.EXIT.getActionName());
+        System.out.println("-------------");
+
     }
 
     public void displayCartItems(Map<MenuItem, Integer> items) {
         System.out.println("\n-------------");
-        System.out.println("[ Orders ]");
+        System.out.println("[ Current Cart Status ]");
         for (MenuItem key : items.keySet()) {
             System.out.printf("%s %.2f 수량: %d\n", key.getName(), key.getPrice(), items.get(key));
         }
         System.out.println("-------------");
     }
 
-    public void displayMenuItems(String category, List<MenuItem> items) {
+    public void displayMenuItems(List<MenuItem> items) {
         System.out.println("\n-------------");
-        System.out.printf("[ %s MENU ] \n", category);
+        System.out.printf("[ ORDER MENU ]\n");
         IntStream.range(0, items.size())
                 .forEach(i -> {
                     MenuItem item = items.get(i);
@@ -68,18 +70,19 @@ public class Output {
 
     public void displayDiscount(Discount[] discounts) {
         System.out.println("\n-------------");
-        for(int i = 0; i < discounts.length; i++) {
+        for (int i = 0; i < discounts.length; i++) {
             String name = discounts[i].getDiscountName();
             int percentage = discounts[i].getDiscountPercentage();
             System.out.printf("%d. %s : %d%% \n", i + 1, name, percentage);
         }
+        System.out.println("0. 주문 이어서 하기");
         System.out.println("-------------");
     }
 
     public Map<Integer, MenuItem> displayCartItemsForCancel(Map<MenuItem, Integer> items) {
         Map<Integer, MenuItem> map = new HashMap<>();
         int i = 0;
-        for(MenuItem item : items.keySet()) {
+        for (MenuItem item : items.keySet()) {
             i++;
             System.out.printf("%d. %s $%.2f quantity: %d \n", i, item.getName(), item.getPrice(), items.get(item));
             map.put(i, item);
