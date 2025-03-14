@@ -1,7 +1,7 @@
-package enums;
+package kiosk.enums;
 
 /**
- * packageName    : enums
+ * packageName    : kiosk.enums
  * fileName       : Discount
  * author         : yong
  * date           : 3/12/25
@@ -20,6 +20,8 @@ public enum Discount {
     private final int discountPercentage;
     private final String discountName;
     private final double discountRatio;
+
+    public static final int SIZE = 4;
 
     Discount(int discountPercentage, String discountName, double discountRatio) {
         this.discountPercentage = discountPercentage;

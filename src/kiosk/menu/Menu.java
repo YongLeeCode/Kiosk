@@ -1,11 +1,13 @@
-package menu;
-
-import enums.Category;
+package kiosk.menu;
 
 import java.util.List;
 import java.util.Map;
 
 public class Menu {
+    public static final int BURGER = 1;
+    public static final int DRINK = 2;
+    public static final int DESSERT = 3;
+
     private final List<MenuItem> burgers = List.of(
             new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"),
             new MenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"),
@@ -27,21 +29,21 @@ public class Menu {
             new MenuItem("Coal slaw", 5.4, "중독 될거 같아요 ~.~")
     );
 
-    Map<Category, List<MenuItem>> menuCategory = Map.of(
-            Category.BURGERS, burgers,
-            Category.DRINKS, drinks,
-            Category.DESSERTS, desserts
+    Map<Integer, List<MenuItem>> menuCategory = Map.of(
+            BURGER, burgers,
+            DRINK, drinks,
+            DESSERT, desserts
     );
 
-    public List<MenuItem> getItems(Category category) {
+    public List<MenuItem> getItems(int category) {
         return menuCategory.get(category);
     }
 
-    public MenuItem getItem(Category c, int item) {
+    public MenuItem getItem(int c, int item) {
         return getItems(c).get(item - 1);
     }
 
-    public int getItemsLength(Category c) {
+    public int getItemsLength(int c) {
         return getItems(c).size();
     }
 }

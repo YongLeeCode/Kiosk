@@ -1,15 +1,15 @@
-package cart;
+package kiosk.cart;
 
-import menu.MenuItem;
+import kiosk.menu.MenuItem;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<MenuItem, Integer> mapItems = new HashMap<>();
+    private final Map<MenuItem, Integer> mapItems = new HashMap<>();
 
-    public void removeCart() {
-        mapItems = new HashMap<>();
+    public void removeCart(MenuItem item) {
+        mapItems.remove(item);
     }
 
     public void addToCart(MenuItem item) {
@@ -27,8 +27,8 @@ public class Cart {
     public double getTotal(double discount) {
         double total = 0;
         for (MenuItem item : mapItems.keySet()) {
-            total += (item.getPrice() * mapItems.get(item)) * discount;
+            total += item.getPrice() * mapItems.get(item);
         }
-        return total;
+        return total * discount;
     }
 }
