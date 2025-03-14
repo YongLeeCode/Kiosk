@@ -21,6 +21,8 @@ public enum Discount {
     private final String discountName;
     private final double discountRatio;
 
+    public static final int SIZE = 4;
+
     Discount(int discountPercentage, String discountName, double discountRatio) {
         this.discountPercentage = discountPercentage;
         this.discountName = discountName;
