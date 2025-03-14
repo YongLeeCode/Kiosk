@@ -1,6 +1,6 @@
 package kiosk.io;
 
-import kiosk.Kiosk;
+import kiosk.enums.Action;
 import kiosk.menu.MenuItem;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -11,7 +11,9 @@ public class Input {
 
     public int getNumber() {
         try {
-            return scanner.nextInt();
+            int userChoice =  scanner.nextInt();
+            scanner.nextLine();
+            return userChoice;
         } catch (InputMismatchException e) {
             System.out.println("번호만 입력 가능합니다.");
             scanner.nextLine();
@@ -21,15 +23,16 @@ public class Input {
 
     public int getItemNumber(int size) {
         try {
-            int itemNumber = scanner.nextInt();
-            if((itemNumber >= 1 && itemNumber <= size) || itemNumber == 0) {
-                return itemNumber;
+            String input = scanner.nextLine();
+            int userChoice = Integer.parseInt(input);
+
+            if (userChoice >= 0 && userChoice <= size) {
+                return userChoice;
             }
             throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println("번호만 입력 가능합니다.");
             System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
-            scanner.nextLine();
             return getItemNumber(size);
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
@@ -38,27 +41,43 @@ public class Input {
         }
     }
 
-    public int getOrderDecision() {
+    public int getYesOrNo() {
         try {
-            return switch (scanner.nextInt()) {
-                case 1 -> Kiosk.ORDER;
-                case 2 -> Kiosk.MAIN_MENU;
+            String input = scanner.nextLine();
+            int userChoice = Integer.parseInt(input);
+            return switch (userChoice) {
+                case 1 -> Action.PURCHASE.getActionNumber();
+                case 2 -> Action.ORDER.getActionNumber();
                 default -> throw new IndexOutOfBoundsException("선택사항에 없는 번호입니다.");
             };
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             System.out.println("번호만 입력 가능합니다.");
             System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
-            scanner.nextLine();
-            return getOrderDecision();
+            return getYesOrNo();
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
             System.out.println("메뉴판에 있는 번호를 다시 선택해주세요.");
-            return getOrderDecision();
+            return getYesOrNo();
         }
     }
 
     public MenuItem getCancelItem(Map<Integer, MenuItem> items) {
-        return items.get(scanner.nextInt());
+        try {
+            int userChoice = scanner.nextInt();
+            if(items.size() >= userChoice && userChoice >= 1) {
+                return items.get(userChoice);
+            }
+            throw new IndexOutOfBoundsException("번호만 입력해주세요.");
+        } catch (InputMismatchException e) {
+            scanner.nextLine();
+            System.out.println("숫자만 입력이 가능합니다.");
+            System.out.println("제거할 상품을 다시 선택해주세요.");
+            return getCancelItem(items);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            System.out.println("제거할 상품의 번호를 다시 선택해주세요.");
+            return getCancelItem(items);
+        }
     }
 }
 
